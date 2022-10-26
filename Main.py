@@ -1,23 +1,11 @@
-from random import randint
-import Methods
+import Process_game
 
-candies = 2021
-max_move = 28
-count_for_check_win = candies // max_move
-
-name_player = input('Введите свое имя: ')
-
-determing_moves = randint(0, 1)
-
-win = False
-while not win:
-    if determing_moves % 2 == 0:
-        candies = Methods.move_player(name_player, candies, max_move)
+type_game = input('Введите 1, если хотите играть с другим игроком, и любую другую цифру, если с ботом... ')
+if (type_game == '1'):
+    Process_game.player_vs_player()
+else:
+    intel = input('Введите 0, если хотите играть с глупым ботом, и любую другую цифру, если с умным... ')
+    if intel == '0':
+        Process_game.player_vs_stupid_bot ()
     else:
-        candies = Methods.move_bot(candies, max_move)
-    if determing_moves >= count_for_check_win - 1:
-        temp = Methods.check_win(candies, determing_moves, name_player)
-        if temp:
-            print(f'{temp} выиграл')
-            win = True
-    determing_moves += 1
+        Process_game.player_vs_smart_bot ()
